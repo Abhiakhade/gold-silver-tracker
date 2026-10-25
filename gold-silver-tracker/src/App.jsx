@@ -15,7 +15,7 @@ import GoldHistorySummary from "./components/GoldHistorySummary";
 import PriceChange from "./components/PriceChange";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
-import SeoContent from "./components/SeoContent";
+import SeoContent from "./components/Seocontent";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
