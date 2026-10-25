@@ -15,7 +15,6 @@ import GoldHistorySummary from "./components/GoldHistorySummary.jsx";
 import PriceChange from "./components/PriceChange.jsx";
 import Footer from "./components/Footer.jsx";
 import Loader from "./components/Loader.jsx";
-import SeoContent from "./components/SeoContent.jsx";
 
 const API_URL = (
   import.meta.env.VITE_API_URL || "http://localhost:5000"
@@ -199,12 +198,6 @@ function App() {
             <GoldHistorySummary refreshKey={refreshKey} />
             <PriceChange refreshKey={refreshKey} />
           </div>
-
-          <div className="min-w-0 space-y-6 lg:col-span-7">
-            <GoldHistoryChart refreshKey={refreshKey} />
-            <SeoContent />
-          </div>
-        </section>
 
         <section className="mt-8 rounded-2xl border border-amber-200/80 bg-white/70 p-4">
           <div className="flex items-start gap-3">
