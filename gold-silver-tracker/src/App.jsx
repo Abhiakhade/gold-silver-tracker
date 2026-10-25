@@ -7,17 +7,19 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import Header from "./components/Header";
-import PriceCard from "./components/PriceCard";
-import GoldHistoryChart from "./components/GoldHistoryChart";
-import PriceCalculator from "./components/PriceCalculator";
-import GoldHistorySummary from "./components/GoldHistorySummary";
-import PriceChange from "./components/PriceChange";
-import Footer from "./components/Footer";
-import Loader from "./components/Loader";
-import SeoContent from "./components/Seocontent";
+import Header from "./components/Header.jsx";
+import PriceCard from "./components/PriceCard.jsx";
+import GoldHistoryChart from "./components/GoldHistoryChart.jsx";
+import PriceCalculator from "./components/PriceCalculator.jsx";
+import GoldHistorySummary from "./components/GoldHistorySummary.jsx";
+import PriceChange from "./components/PriceChange.jsx";
+import Footer from "./components/Footer.jsx";
+import Loader from "./components/Loader.jsx";
+import SeoContent from "./components/SeoContent.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = (
+  import.meta.env.VITE_API_URL || "http://localhost:5000"
+).replace(/\/$/, "");
 
 function App() {
   const [prices, setPrices] = useState(null);
@@ -42,7 +44,7 @@ function App() {
       setError(
         err.code === "ECONNABORTED"
           ? "The request timed out. Please try again."
-          : "Unable to load prices. Please check your backend connection.",
+          : "Unable to load prices. Please check the backend connection.",
       );
     } finally {
       setLoading(false);
@@ -93,16 +95,13 @@ function App() {
     <div className="relative min-h-screen overflow-x-hidden bg-[#FFFCF5] text-[#2B2013]">
       {firstLoad && <Loader />}
 
-      {/* Background decoration */}
       <div className="pointer-events-none absolute -top-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-amber-200/60 blur-3xl sm:h-[34rem] sm:w-[34rem]" />
 
       <div className="pointer-events-none absolute right-0 top-1/2 h-72 w-72 rounded-full bg-yellow-100 blur-3xl" />
 
       <main className="relative mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
-        {/* Header (contains the Refresh button) */}
         <Header onRefresh={getPrices} loading={loading} updatedAt={updatedAt} />
 
-        {/* Hero section */}
         <section className="mb-8 mt-2 sm:mb-10 sm:mt-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-amber-300 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700 shadow-sm sm:text-xs">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-amber-500" />
@@ -110,7 +109,7 @@ function App() {
           </span>
 
           <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-6xl">
-            Gold & Silver{" "}
+            Gold &amp; Silver{" "}
             <span className="bg-gradient-to-r from-[#E6B422] via-[#B8860B] to-[#7A5200] bg-clip-text text-transparent">
               Price Today
             </span>
@@ -129,7 +128,6 @@ function App() {
           )}
         </section>
 
-        {/* Error message */}
         {error && (
           <div
             role="alert"
@@ -139,7 +137,6 @@ function App() {
 
             <div className="flex-1">
               <p className="font-semibold">Unable to update prices</p>
-
               <p className="mt-1">{error}</p>
 
               <button
@@ -154,7 +151,6 @@ function App() {
           </div>
         )}
 
-        {/* Price cards */}
         <section
           aria-label="Gold and silver prices per gram"
           className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5"
@@ -194,29 +190,22 @@ function App() {
           />
         </section>
 
-        {/* Calculator and historical data */}
         <section
           aria-label="Price calculator and historical gold prices"
           className="mt-6 grid gap-6 sm:mt-8 lg:grid-cols-12 lg:items-start"
         >
-          {/* Left column */}
           <div className="min-w-0 space-y-6 lg:col-span-5">
             <PriceCalculator rates={rates} />
-
             <GoldHistorySummary refreshKey={refreshKey} />
-
             <PriceChange refreshKey={refreshKey} />
           </div>
 
-          {/* Right column */}
           <div className="min-w-0 space-y-6 lg:col-span-7">
             <GoldHistoryChart refreshKey={refreshKey} />
-
             <SeoContent />
           </div>
         </section>
 
-        {/* Price information disclaimer */}
         <section className="mt-8 rounded-2xl border border-amber-200/80 bg-white/70 p-4">
           <div className="flex items-start gap-3">
             <TrendingUp size={20} className="mt-0.5 shrink-0 text-amber-700" />
@@ -235,15 +224,14 @@ function App() {
                   goldprice.dev
                 </a>
                 . Prices may not represent the latest local jewellery-market
-                rates. Actual purchase prices can vary by location, taxes,
-                making charges, purity verification, and dealer. Calculator
-                results are estimates only.
+                rates. Actual prices can vary by location, taxes, making
+                charges, purity verification, and dealer. Calculator results are
+                estimates only.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Footer */}
         <Footer />
       </main>
     </div>
