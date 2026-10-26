@@ -1,6 +1,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
+import { Analytics } from "@vercel/analytics/react";
 import {
   Coins,
   CircleDollarSign,
@@ -102,11 +103,8 @@ function App() {
       <div className="pointer-events-none absolute right-0 top-[650px] h-72 w-72 rounded-full bg-orange-200/20 blur-[100px]" />
 
       <main className="relative mx-auto w-full max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
-        <Header
-          onRefresh={getPrices}
-          loading={loading}
-          updatedAt={updatedAt}
-        />
+        <Analytics />
+        <Header onRefresh={getPrices} loading={loading} updatedAt={updatedAt} />
 
         {/* Hero section */}
         <section className="relative mb-8 mt-8 overflow-hidden rounded-[28px] border border-amber-200/60 bg-gradient-to-br from-white via-[#FFFCF5] to-[#F8EDD5] p-6 shadow-sm sm:mb-10 sm:mt-10 sm:p-10 lg:p-14">
@@ -128,9 +126,9 @@ function App() {
             </h1>
 
             <p className="mt-5 max-w-xl text-sm leading-7 text-stone-600 sm:text-base sm:leading-8">
-              Track precious metal prices in Indian rupees. Compare gold
-              purity, explore price movements, and estimate the cost of
-              your next purchase.
+              Track precious metal prices in Indian rupees. Compare gold purity,
+              explore price movements, and estimate the cost of your next
+              purchase.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -221,7 +219,13 @@ function App() {
 
             <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-800">
               <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              {loading ? "Updating data" : error ? "Update failed" : prices ? "Data loaded" : "Waiting for data"}
+              {loading
+                ? "Updating data"
+                : error
+                  ? "Update failed"
+                  : prices
+                    ? "Data loaded"
+                    : "Waiting for data"}
             </span>
           </div>
 
@@ -287,8 +291,8 @@ function App() {
                 </h2>
 
                 <p className="mt-2 text-sm leading-6 text-stone-500">
-                  Review historical gold price movements to understand
-                  changes over time.
+                  Review historical gold price movements to understand changes
+                  over time.
                 </p>
               </div>
 
@@ -308,9 +312,9 @@ function App() {
 
                   <p className="mt-2 text-sm leading-6 text-stone-600">
                     Gold and silver prices can change with global markets,
-                    currency movements, and local demand. Jewellery bills
-                    may also include GST, making charges, and other fees.
-                    Use the calculator for estimates, not a final shop quote.
+                    currency movements, and local demand. Jewellery bills may
+                    also include GST, making charges, and other fees. Use the
+                    calculator for estimates, not a final shop quote.
                   </p>
                 </div>
               </div>
@@ -326,9 +330,7 @@ function App() {
             </div>
 
             <div>
-              <h2 className="text-sm font-extrabold">
-                About these prices
-              </h2>
+              <h2 className="text-sm font-extrabold">About these prices</h2>
 
               <p className="mt-2 text-xs leading-6 text-stone-500 sm:text-sm">
                 Price data provided by{" "}
@@ -340,10 +342,10 @@ function App() {
                 >
                   goldprice.dev
                 </a>
-                . Rates may differ from local jewellery-market prices.
-                Actual costs depend on location, taxes, making charges,
-                purity verification, and dealer pricing. Calculator results
-                are estimates only.
+                . Rates may differ from local jewellery-market prices. Actual
+                costs depend on location, taxes, making charges, purity
+                verification, and dealer pricing. Calculator results are
+                estimates only.
               </p>
             </div>
           </div>
